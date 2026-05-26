@@ -1,0 +1,36 @@
+{
+  "allowedExternalDomains": [
+    "microsoft.com",
+    "microsoft.onmicrosoft.com"
+  ],
+  "classificationControls": {
+    "public": {
+      "sensitivityLabel": "Public",
+      "retention": "Standard collaboration"
+    },
+    "general": {
+      "sensitivityLabel": "General",
+      "retention": "Standard collaboration"
+    },
+    "confidential": {
+      "sensitivityLabel": "Confidential",
+      "retention": "Business records"
+    },
+    "highly-confidential": {
+      "sensitivityLabel": "Highly Confidential",
+      "retention": "Restricted business records"
+    }
+  },
+  "requiredApprovals": {
+    "default": [
+      "SharePoint Service Owner"
+    ],
+    "externalSharing": [
+      "Information Protection Owner",
+      "Security Review"
+    ],
+    "confidentialData": [
+      "Data Owner"
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Create SharePoint Site Request",
+  "trigger": "Copilot Studio custom action or MCP/A2A gateway HTTP request",
+  "inputs": [
+    "requesterEmail",
+    "businessOwnerEmail",
+    "siteName",
+    "purpose",
+    "audience",
+    "usageDescription",
+    "classification",
+    "lifecycle",
+    "externalDomains",
+    "requestedUrlSlug",
+    "template"
+  ],
+  "actions": [
+    "Validate required fields",
+    "Create request row in Dataverse or SharePoint List",
+    "Evaluate governance rules",
+    "Set status to pending_approval",
+    "Call Admin Approval flow"
+  ],
+  "outputs": [
+    "requestId",
+    "status",
+    "governanceDecision",
+    "trackingUrl"
+  ]
+}

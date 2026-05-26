@@ -1,0 +1,21 @@
+{
+  "name": "Admin Approval for SharePoint Site Request",
+  "trigger": "Request status is pending_approval",
+  "actions": [
+    "Post Adaptive Card to configured Teams admin channel",
+    "Send summary email to configured admin mailbox",
+    "Wait for approve, reject, or more information",
+    "Write approval decision to request ledger",
+    "Notify requester of updated status"
+  ],
+  "adaptiveCardFields": [
+    "siteName",
+    "requester",
+    "businessOwner",
+    "purpose",
+    "audience",
+    "classification",
+    "externalDomains",
+    "governanceReasons"
+  ]
+}

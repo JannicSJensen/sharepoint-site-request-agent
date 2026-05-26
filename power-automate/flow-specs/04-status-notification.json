@@ -1,0 +1,15 @@
+{
+  "name": "SharePoint Site Request Status Notification",
+  "trigger": "Request status changes",
+  "channels": [
+    "Copilot Studio status lookup",
+    "Teams admin notification",
+    "Requester email notification"
+  ],
+  "actions": [
+    "Create status summary",
+    "Notify requester for major status changes",
+    "Notify admins for governance exceptions",
+    "Keep request ledger as source of truth"
+  ]
+}

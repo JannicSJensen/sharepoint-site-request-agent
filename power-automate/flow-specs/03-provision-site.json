@@ -1,0 +1,18 @@
+{
+  "name": "Plan SharePoint Site Provisioning",
+  "trigger": "Request status is ready_for_provisioning",
+  "safeDefault": "planning-only",
+  "actions": [
+    "Generate SharePoint provisioning plan",
+    "Resolve template mapping",
+    "Resolve sensitivity and retention labels",
+    "Prepare Microsoft Graph and SharePoint Admin API payloads",
+    "Set status to provisioning_planned"
+  ],
+  "disabledLiveActions": [
+    "Create site",
+    "Apply sharing policy",
+    "Apply Purview labels",
+    "Add owners and members"
+  ]
+}
