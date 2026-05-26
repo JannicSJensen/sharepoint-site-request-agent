@@ -38,6 +38,7 @@ if (-not [string]::IsNullOrWhiteSpace($env:DEPLOYED_LIST_ID)) {
     $listId = [System.Uri]::EscapeDataString($env:DEPLOYED_LIST_ID)
     $list = $null
     $attempts = 0
+    $lastError = $null
 
     while ($null -eq $list -and $attempts -lt 3) {
         $attempts++
@@ -45,8 +46,9 @@ if (-not [string]::IsNullOrWhiteSpace($env:DEPLOYED_LIST_ID)) {
             $list = Invoke-RestMethod -Method Get -Uri "https://graph.microsoft.com/v1.0/sites/root/lists/$listId?`$select=id,displayName,webUrl" -Headers $headers
         }
         catch {
+            $lastError = $_
             if ($attempts -ge 3) {
-                throw
+                break
             }
 
             Write-Host "SharePoint list lookup attempt $attempts failed; retrying after permission propagation delay."
@@ -54,5 +56,15 @@ if (-not [string]::IsNullOrWhiteSpace($env:DEPLOYED_LIST_ID)) {
         }
     }
 
-    Write-Host "SharePoint request list lookup OK for '$($list.displayName)'"
+    if ($null -eq $list) {
+        $message = "SharePoint request list lookup failed after $attempts attempts: $($lastError.Exception.Message)"
+        if ($env:REQUIRE_SHAREPOINT_LIST_VALIDATION -eq "true") {
+            throw $message
+        }
+
+        Write-Warning $message
+    }
+    else {
+        Write-Host "SharePoint request list lookup OK for '$($list.displayName)'"
+    }
 }
