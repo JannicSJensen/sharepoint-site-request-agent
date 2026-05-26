@@ -45,4 +45,6 @@ jobs:
         env:
           TENANT_ID: f24e5cef-e4a8-409f-b11b-51e4f40467c1
           EXPECTED_TEST_USER_UPN: ${{ secrets.TEST_USER_UPN }}
+          DEPLOYED_SITE_ID: m365cpi16380285.sharepoint.com,fe9c2bf8-f429-4fc9-af4f-b2356d8e5e30,f387fb96-2323-406c-871b-df4a5aea1053
+          DEPLOYED_LIST_ID: 80878f5a-df44-467f-8509-9260a4a2e74e
         run: pwsh -File scripts/test-tenant-access.ps1

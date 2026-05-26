@@ -33,3 +33,10 @@ if (-not [string]::IsNullOrWhiteSpace($env:EXPECTED_TEST_USER_UPN)) {
     $user = Invoke-RestMethod -Method Get -Uri "https://graph.microsoft.com/v1.0/users/$encodedUpn?`$select=id,userPrincipalName" -Headers $headers
     Write-Host "Test user lookup OK for $($user.userPrincipalName)"
 }
+
+if (-not [string]::IsNullOrWhiteSpace($env:DEPLOYED_SITE_ID) -and -not [string]::IsNullOrWhiteSpace($env:DEPLOYED_LIST_ID)) {
+    $siteId = [System.Uri]::EscapeDataString($env:DEPLOYED_SITE_ID)
+    $listId = [System.Uri]::EscapeDataString($env:DEPLOYED_LIST_ID)
+    $list = Invoke-RestMethod -Method Get -Uri "https://graph.microsoft.com/v1.0/sites/$siteId/lists/$listId?`$select=id,displayName,webUrl" -Headers $headers
+    Write-Host "SharePoint request list lookup OK for '$($list.displayName)'"
+}

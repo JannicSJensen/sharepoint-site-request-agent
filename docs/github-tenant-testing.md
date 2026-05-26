@@ -26,6 +26,8 @@ The configured demo tenant values are:
 | Tenant ID | `f24e5cef-e4a8-409f-b11b-51e4f40467c1` |
 | OIDC client ID | `04e23119-3ed3-4bf8-bf5b-2f76071a2de5` |
 | GitHub subject | `repo:JannicSJensen/sharepoint-site-request-agent:ref:refs/heads/main` |
+| Deployed SharePoint site | `https://m365cpi16380285.sharepoint.com` |
+| Deployed request list | `https://m365cpi16380285.sharepoint.com/Lists/SharePoint%20Site%20Requests` |
 
 ## Entra app registration setup
 
@@ -37,6 +39,7 @@ The configured demo tenant values are:
 3. Grant Microsoft Graph application permissions needed for read-only smoke tests:
    - `Organization.Read.All`
    - `User.Read.All` if `TEST_USER_UPN` is configured
+   - `Sites.Read.All` if validating the deployed SharePoint request list
 4. Grant admin consent in the demo tenant.
 5. Update `.github/workflows/tenant-smoke-test.yml` with the app registration client ID.
 
