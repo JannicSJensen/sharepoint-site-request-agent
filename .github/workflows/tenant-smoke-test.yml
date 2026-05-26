@@ -1,0 +1,47 @@
+name: Tenant smoke test
+
+on:
+  workflow_dispatch:
+    inputs:
+      tenantId:
+        description: Entra tenant ID to test against
+        required: true
+        default: 80cb67af-5d59-439b-a3cb-6c3f797ec7fa
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  tenant-smoke-test:
+    name: Read-only tenant connectivity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate local package
+        run: npm run validate
+
+      - name: Azure login with GitHub OIDC
+        uses: azure/login@v2
+        with:
+          tenant-id: ${{ inputs.tenantId }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          allow-no-subscriptions: true
+
+      - name: Read-only Graph smoke test
+        env:
+          TENANT_ID: ${{ inputs.tenantId }}
+          EXPECTED_TEST_USER_UPN: ${{ secrets.TEST_USER_UPN }}
+        run: pwsh -File scripts/test-tenant-access.ps1

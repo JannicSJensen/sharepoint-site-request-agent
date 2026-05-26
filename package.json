@@ -9,6 +9,7 @@
     "dev": "tsx watch src/index.ts",
     "start": "node dist/index.js",
     "test": "vitest run",
+    "test:tenant": "pwsh -File scripts/test-tenant-access.ps1",
     "validate": "npm run build && npm test"
   },
   "keywords": [
