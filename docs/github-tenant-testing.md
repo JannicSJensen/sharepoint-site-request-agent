@@ -15,10 +15,17 @@ Use a dedicated Entra application registration with GitHub workload identity fed
 
 | Secret | Purpose |
 |---|---|
-| `AZURE_CLIENT_ID` | Client ID of the Entra app registration configured for GitHub OIDC. |
 | `TEST_USER_UPN` | Optional. UPN of a demo user to verify read-only lookup. |
 
 The tenant ID is supplied as a `workflow_dispatch` input and defaults to the demo tenant.
+
+The configured demo tenant values are:
+
+| Setting | Value |
+|---|---|
+| Tenant ID | `f24e5cef-e4a8-409f-b11b-51e4f40467c1` |
+| OIDC client ID | `04e23119-3ed3-4bf8-bf5b-2f76071a2de5` |
+| GitHub subject | `repo:JannicSJensen/sharepoint-site-request-agent:ref:refs/heads/main` |
 
 ## Entra app registration setup
 
@@ -31,7 +38,7 @@ The tenant ID is supplied as a `workflow_dispatch` input and defaults to the dem
    - `Organization.Read.All`
    - `User.Read.All` if `TEST_USER_UPN` is configured
 4. Grant admin consent in the demo tenant.
-5. Add the app registration client ID as the GitHub repository secret `AZURE_CLIENT_ID`.
+5. Update `.github/workflows/tenant-smoke-test.yml` with the app registration client ID.
 
 ## Running the smoke test
 
