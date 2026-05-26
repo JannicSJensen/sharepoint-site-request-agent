@@ -2,11 +2,6 @@ name: Tenant smoke test
 
 on:
   workflow_dispatch:
-    inputs:
-      tenantId:
-        description: Entra tenant ID to test against
-        required: true
-        default: f24e5cef-e4a8-409f-b11b-51e4f40467c1
 
 permissions:
   contents: read
@@ -36,12 +31,12 @@ jobs:
       - name: Azure login with GitHub OIDC
         uses: azure/login@v2
         with:
-          tenant-id: ${{ inputs.tenantId }}
+          tenant-id: f24e5cef-e4a8-409f-b11b-51e4f40467c1
           client-id: 04e23119-3ed3-4bf8-bf5b-2f76071a2de5
           allow-no-subscriptions: true
 
       - name: Read-only Graph smoke test
         env:
-          TENANT_ID: ${{ inputs.tenantId }}
+          TENANT_ID: f24e5cef-e4a8-409f-b11b-51e4f40467c1
           EXPECTED_TEST_USER_UPN: ${{ secrets.TEST_USER_UPN }}
         run: pwsh -File scripts/test-tenant-access.ps1
